@@ -19,7 +19,7 @@ class Customer:
 
         for each in self._rentals:
             # add frequent renter points
-            frequent_renter_points = self.get_frequent_renter_points(frequent_renter_points, each)
+            frequent_renter_points += self.get_frequent_renter_points(each)
 
             # show figures for this rental&
             result += "\t" + each.get_movie().get_title() + "\t" + str(each.get_charge()) + "\n"
@@ -30,5 +30,5 @@ class Customer:
         result += "You earned " + str(frequent_renter_points) + " frequent renter points"
         return result
 
-    def get_frequent_renter_points(self, frequent_renter_points, each):
-        return each.get_frequent_renter_points(frequent_renter_points)
+    def get_frequent_renter_points(self, each):
+        return each.get_frequent_renter_points()
