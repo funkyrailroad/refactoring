@@ -31,3 +31,12 @@ class Movie:
             if days_rented > 3:
                 this_amount += (days_rented - 3 ) * 1.5
         return this_amount
+
+    def get_frequent_renter_points(self, days_rented):
+        # add frequent renter points
+        frequent_renter_points = 1
+        # add bonus for a two day new release rental
+        if ((self.get_price_code() == self.NEW_RELEASE) and
+                (days_rented > 1)) :
+            frequent_renter_points += 1
+        return frequent_renter_points
