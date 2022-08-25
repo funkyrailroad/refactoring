@@ -20,13 +20,13 @@ class Movie:
         this_amount = 0
 
         # determine amounts for self line
-        if self.get_price_code() == Movie("","").REGULAR:
+        if self.get_price_code() == self.REGULAR:
             this_amount +=  2
             if days_rented > 2:
                 this_amount += (days_rented - 2 ) * 1.5
-        if self.get_price_code() == Movie("","").NEW_RELEASE:
+        if self.get_price_code() == self.NEW_RELEASE:
             this_amount += days_rented * 3
-        if self.get_price_code() == Movie("","").CHILDRENS:
+        if self.get_price_code() == self.CHILDRENS:
             this_amount +=  1.5
             if days_rented > 3:
                 this_amount += (days_rented - 3 ) * 1.5
