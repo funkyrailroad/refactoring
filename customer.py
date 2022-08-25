@@ -19,13 +19,13 @@ class Customer:
         # determine amounts for each line
         for each in self._rentals:
             this_amount = 0
-            if each.get_movie().get_price_code() == Movie.REGULAR:
+            if each.get_movie().get_price_code() == Movie("","").REGULAR:
                 this_amount +=  2
                 if each.get_days_rented() > 2:
                     this_amount += (each.get_days_rented() - 2 ) * 1.5
-            if each.get_movie().get_price_code() == Movie.NEW_RELEASE:
+            if each.get_movie().get_price_code() == Movie("","").NEW_RELEASE:
                 this_amount += each.get_days_rented() * 3
-            if each.get_movie().get_price_code() == Movie.CHILDRENS:
+            if each.get_movie().get_price_code() == Movie("","").CHILDRENS:
                 this_amount +=  1.5
                 if each.get_days_rented() > 3:
                     this_amount += (each.get_days_rented() - 3 ) * 1.5
@@ -33,7 +33,7 @@ class Customer:
             # add frequent renter points
             frequent_renter_points += 1
             # add bonus for a two day new release rental
-            if ((each.get_movie().get_price_code() == Movie.NEW_RELEASE) and
+            if ((each.get_movie().get_price_code() == Movie("","").NEW_RELEASE) and
                     (each.get_days_rented() > 1)) :
                 frequent_renter_points += 1
 
