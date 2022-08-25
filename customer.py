@@ -35,18 +35,18 @@ class Customer:
         result += "You earned " + str(frequent_renter_points) + " frequent renter points"
         return result
 
-    def amount_for(self, each):
+    def amount_for(self, rental):
         this_amount = 0
 
-        # determine amounts for each line
-        if each.get_movie().get_price_code() == Movie("","").REGULAR:
+        # determine amounts for rental line
+        if rental.get_movie().get_price_code() == Movie("","").REGULAR:
             this_amount +=  2
-            if each.get_days_rented() > 2:
-                this_amount += (each.get_days_rented() - 2 ) * 1.5
-        if each.get_movie().get_price_code() == Movie("","").NEW_RELEASE:
-            this_amount += each.get_days_rented() * 3
-        if each.get_movie().get_price_code() == Movie("","").CHILDRENS:
+            if rental.get_days_rented() > 2:
+                this_amount += (rental.get_days_rented() - 2 ) * 1.5
+        if rental.get_movie().get_price_code() == Movie("","").NEW_RELEASE:
+            this_amount += rental.get_days_rented() * 3
+        if rental.get_movie().get_price_code() == Movie("","").CHILDRENS:
             this_amount +=  1.5
-            if each.get_days_rented() > 3:
-                this_amount += (each.get_days_rented() - 3 ) * 1.5
+            if rental.get_days_rented() > 3:
+                this_amount += (rental.get_days_rented() - 3 ) * 1.5
         return this_amount
