@@ -16,9 +16,10 @@ class Customer:
         frequent_renter_points = 0
         result = "Rental Record for " +  self.get_name() + "\n"
 
-        # determine amounts for each line
         for each in self._rentals:
             this_amount = 0
+
+            # determine amounts for each line
             if each.get_movie().get_price_code() == Movie("","").REGULAR:
                 this_amount +=  2
                 if each.get_days_rented() > 2:
