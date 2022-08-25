@@ -52,3 +52,19 @@ class Tests(unittest.TestCase):
         statement = self.bob.statement()
         gt_statement = 'Rental Record for Bob\n\tnew_release_movie\t15\nAmount owed is 15\nYou earned 2 frequent renter points'
         self.assertEqual(statement, gt_statement)
+
+    def test_all_short(self):
+        self.bob.add_rental(Rental(self.childrens_movie, 1))
+        self.bob.add_rental(Rental(self.new_release_movie, 1))
+        self.bob.add_rental(Rental(self.regular_movie, 1))
+        statement = self.bob.statement()
+        gt_statement = 'Rental Record for Bob\n\tchildrens_movie\t1.5\n\tnew_release_movie\t3\n\tregular_movie\t2\nAmount owed is 6.5\nYou earned 3 frequent renter points'
+        self.assertEqual(statement, gt_statement)
+
+    def test_all_long(self):
+        self.bob.add_rental(Rental(self.childrens_movie, 5))
+        self.bob.add_rental(Rental(self.new_release_movie, 5))
+        self.bob.add_rental(Rental(self.regular_movie, 5))
+        statement = self.bob.statement()
+        gt_statement = 'Rental Record for Bob\n\tchildrens_movie\t4.5\n\tnew_release_movie\t15\n\tregular_movie\t6.5\nAmount owed is 26.0\nYou earned 4 frequent renter points'
+        self.assertEqual(statement, gt_statement)
