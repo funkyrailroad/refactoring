@@ -9,6 +9,10 @@ class Price(ABC):
     def get_charge(self, days_rented):
         pass
 
+    @abstractmethod
+    def get_frequent_renter_points(self, days_rented):
+        pass
+
 
 class ChildrensPrice(Price):
     def get_price_code(self):
@@ -20,6 +24,9 @@ class ChildrensPrice(Price):
             this_amount += (days_rented - 3 ) * 1.5
         return this_amount
 
+    def get_frequent_renter_points(self, days_rented):
+        return 1
+
 
 class NewReleasePrice(Price):
     def get_price_code(self):
@@ -28,6 +35,12 @@ class NewReleasePrice(Price):
     def get_charge(self, days_rented):
         this_amount = days_rented * 3
         return this_amount
+
+    def get_frequent_renter_points(self, days_rented):
+        frequent_renter_points = 1
+        if (days_rented > 1) :
+            frequent_renter_points += 1
+        return frequent_renter_points
 
 
 class RegularPrice(Price):
@@ -39,6 +52,9 @@ class RegularPrice(Price):
         if days_rented > 2:
             this_amount += (days_rented - 2 ) * 1.5
         return this_amount
+
+    def get_frequent_renter_points(self, days_rented):
+        return 1
 
 
 class Movie:
@@ -71,10 +87,4 @@ class Movie:
         return self._price.get_charge(days_rented)
 
     def get_frequent_renter_points(self, days_rented):
-        # add frequent renter points
-        frequent_renter_points = 1
-        # add bonus for a two day new release rental
-        if ((self.get_price_code() == self.NEW_RELEASE) and
-                (days_rented > 1)) :
-            frequent_renter_points += 1
-        return frequent_renter_points
+        return self._price.get_frequent_renter_points(days_rented)
