@@ -5,36 +5,40 @@ class Price(ABC):
     def get_price_code(self):
         pass
 
+    @abstractmethod
     def get_charge(self, days_rented):
-        this_amount = 0
-
-        # determine amounts for self line
-        if self.get_price_code() == Movie.REGULAR:
-            this_amount +=  2
-            if days_rented > 2:
-                this_amount += (days_rented - 2 ) * 1.5
-        if self.get_price_code() == Movie.NEW_RELEASE:
-            this_amount += days_rented * 3
-        if self.get_price_code() == Movie.CHILDRENS:
-            this_amount +=  1.5
-            if days_rented > 3:
-                this_amount += (days_rented - 3 ) * 1.5
-        return this_amount
+        pass
 
 
 class ChildrensPrice(Price):
     def get_price_code(self):
         return Movie.CHILDRENS
 
+    def get_charge(self, days_rented):
+        this_amount =  1.5
+        if days_rented > 3:
+            this_amount += (days_rented - 3 ) * 1.5
+        return this_amount
+
 
 class NewReleasePrice(Price):
     def get_price_code(self):
         return Movie.NEW_RELEASE
 
+    def get_charge(self, days_rented):
+        this_amount = days_rented * 3
+        return this_amount
+
 
 class RegularPrice(Price):
     def get_price_code(self):
         return Movie.REGULAR
+
+    def get_charge(self, days_rented):
+        this_amount =  2
+        if days_rented > 2:
+            this_amount += (days_rented - 2 ) * 1.5
+        return this_amount
 
 
 class Movie:
